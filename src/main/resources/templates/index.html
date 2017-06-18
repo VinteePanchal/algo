@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html data-ng-app="sortApp">
+<head>
+<meta charset="ISO-8859-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/angular-ui-router.min.js"></script>
+<script src="js/lib/localforage.min.js"></script>
+<script src="js/lib/ngStorage.min.js"></script>
+<script src="js/app/app.js"></script>
+<script src="js/app/service/SortService.js"></script>
+<script src="js/app/controller/SortController.js"></script>
+<link href="css/bootstrap.css" rel="stylesheet" />
+<link href="css/app.css" rel="stylesheet" />
+<title>Bubble Sort</title>
+</head>
+<body>
+	<div class="generic-container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="lead">Bubble Sort</span>
+			</div>
+			<div class="panel-body">
+				<div class="formcontainer">
+					<div class="alert alert-success" role="alert"
+						data-ng-if="ctrl.successMessage">success</div>
+					<div class="alert alert-danger" role="alert"
+						data-ng-if="ctrl.errorMessage">failure</div>
+					<form data-ng-submit="ctrl.submit()" name="myForm"
+						class="form-horizontal">
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label class="col-md-2 control-lable" for="ulist"></label>
+								<div class="col-md-7">
+									<input type="text" data-ng-model="ctrl.unsortedList" id="ulist"
+										class="username form-control input-sm"
+										placeholder="Enter comma seperated numbers" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row" style="margin-left: 15px">
+							<div class="form-actions floatRight">
+								<input type="submit" value="{{'sort'}}"
+									class="btn btn-primary btn-sm"
+									data-ng-disabled="myForm.$invalid || myForm.$pristine" />
+								<button type="button" data-ng-click="ctrl.reset()"
+									class="btn btn-warning btn-sm"
+									data-ng-disabled="myForm.$pristine">Reset</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading"></div>
+			<div class="panel-body" style="margin-top: 30px">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>UNSORTED LIST</th>
+								<th>SORTED LIST</th>
+								<th>TIME TAKEN</th>
+								<th>NUMBER OF SWAPS</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr data-ng-repeat="u in ctrl.getData()">
+								<td>{{u.unsorted}}</td>
+								<td>{{u.sorted}}</td>
+								<td>{{u.duration}}</td>
+								<td>{{u.swaps}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
